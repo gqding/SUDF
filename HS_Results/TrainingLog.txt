@@ -1,0 +1,2 @@
+ nChannel:64, maxIter:100, nConv:4 
+ Changes:average the iteration results 
