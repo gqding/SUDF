@@ -1,4 +1,6 @@
 import numpy as np
+
+
 # from more-itertools import unique_everseen
 
 
@@ -9,10 +11,10 @@ def img_from_sp(sp_img, sp_label):
     :param sp_label: superpixel segmentaion label maps
     :return: rimg: restored image
     """
-    assert len(sp_img)== sp_label.max()+1, "inconsistent superpixel number"
-    rimg = np.zeros(sp_label.shape+(3,))
+    assert len(sp_img) == sp_label.max() + 1, "inconsistent superpixel number"
+    rimg = np.zeros(sp_label.shape + (3,))
     for i in range(len(sp_img)):
-        rimg[sp_label==i, :] = sp_img[i]
+        rimg[sp_label == i, :] = sp_img[i]
     return rimg.astype('uint8')
 
 
@@ -23,10 +25,10 @@ def lbmap_from_sp(sp_lbmap, sp_label):
     :param sp_label: superpixel segmentation label
     :return: r_lbmap: restored label map
     """
-    assert len(sp_lbmap)== sp_label.max()+1, "inconsistent superpixel number"
+    assert len(sp_lbmap) == sp_label.max() + 1, "inconsistent superpixel number"
     r_lbmap = np.zeros(sp_label.shape)
     for i in range(len(sp_lbmap)):
-        r_lbmap[sp_label==i] = sp_lbmap[i]
+        r_lbmap[sp_label == i] = sp_lbmap[i]
     return r_lbmap
 
 

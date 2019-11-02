@@ -14,7 +14,6 @@ import scipy.io
 from FeatureMRmc4 import FeatureMR2
 import timeit
 from skimage.segmentation import slic
-from Gestalt_uncertainty_weighting_max import get_Uncertainty_Weighting_map
 
 
 def mkdir(dir_path):
@@ -242,8 +241,8 @@ with open(log_path, "w") as Traininglog:
             sal2, slic_lables_feat, bsal = FeatureMR2(Feature=featureNorm(output_numpy.astype(np.double)))
             new_sal = np.array(1 * sal2)  # only use slic lables for MR
             # print(bsal)
-            weighted_smap = get_Uncertainty_Weighting_map(sal2, bsal)
-            new_sal_all[batch_idx, :, :] = weighted_smap[:, :]
+            # weighted_smap = get_Uncertainty_Weighting_map(sal2, bsal)
+            # new_sal_all[batch_idx, :, :] = weighted_smap[:, :]
             # superpixel refinement
             # TODO: use Torch Variable instead of numpy for faster calculation
 
@@ -264,7 +263,7 @@ with open(log_path, "w") as Traininglog:
 
             batch_weighted_sal_result_name = batch_weighted_sal_result_path + '/' + file_name + '_' + str(
                 batch_idx) + '.png'
-            cv2.imwrite(batch_weighted_sal_result_name, cv2.transpose(weighted_smap * 255.0))
+            # cv2.imwrite(batch_weighted_sal_result_name, cv2.transpose(weighted_smap * 255.0))
 
             if use_cuda:
                 target = target.cuda()
@@ -286,7 +285,7 @@ with open(log_path, "w") as Traininglog:
             optimizer.step()
 
             # Traininglog.write(" %d / %d : %d, %s \n" % (batch_idx, maxIter, nLabels, str(final_loss.data.cpu().numpy())))
-            print(batch_idx, '/', maxIter, ':', nLabels, final_loss.data)
+            print('Step:', batch_idx, '/', maxIter, ', nLabels:', nLabels, ',loss:', final_loss.data)
             if nLabels <= minLabels:
                 print("nLabels", nLabels, "reached minLabels", minLabels, ".")
                 break
