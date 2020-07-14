@@ -11,7 +11,7 @@ Asako Kanezaki, "Unsupervised Image Segmentation by Backpropagation", in IEEE In
 
 ## Requirements
 
-python3, pytorch
+python3.6, pytorch, scipy==1.2.0,opencv-python, h5py, scikit-image==0.14.0
 
 install torch: 
 `sudo pip3 install torch torchvision`
