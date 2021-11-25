@@ -30,7 +30,7 @@ install opencv:
 <img src="figs/iteration.png" alt="input" style="width:600px">
 
 ### Visualization Results
-<img src="figs/results.png" alt="input" style="width:600px">
+<img src="figs/results.png" alt="input" style="width:700px">
 
 If this code is useful for your research, please cite the following paper:
 
